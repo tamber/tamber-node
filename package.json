@@ -1,0 +1,39 @@
+{
+  "name": "tamber",
+  "version": "0.0.1",
+  "description": "Tamber API",
+  "homepage": "https://github.com/tamber/tamber-node",
+  "author": "Tamber <team@tamber.com> (https://tamber.com/)",
+  "contributors": [
+    "Alexi Robbins <alexi@tamber.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tamber/tamber-node.git"
+  },
+  "bugs:": "https://github.com/tamber/tamber-node/issues",
+  "engines": {
+    "node": ">= v0.10.0"
+  },
+  "main": "lib/tamber.js",
+  "devDependencies": {
+  },
+  "dependencies": {
+    "lodash": "^3.1.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "npm run lint && mocha",
+    "lint": "jscs ."
+  }
+  "keywords": [
+    "tamber",
+    "discovery",
+    "discovery api",
+    "recommendation",
+    "recommendation engine"
+    "real time",
+    "realtime",
+    "suggestion",
+  ],
+}

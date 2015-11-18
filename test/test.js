@@ -1,7 +1,7 @@
 var tamber = require('../lib/Tamber');
 var assert = require('assert');
 
-var engine = tamber.New('sBW1WHQ4bP4Ryfz3AQOo', null);
+var engine = tamber.New('f68jZIyq2gqS18mg3wvl', null);
 
 describe('Property', function() {
 	describe('#Create()', function() {
@@ -18,7 +18,7 @@ describe('Property', function() {
 	describe('#Retrieve()', function() {
 	    it('should retrieve without error', function(done) {
 	    	engine.Property.Retrieve({
-			name : "length",
+			name : "length"
 			}, function(result, err){
 				if (err) throw err;
 	        	done();
@@ -35,10 +35,38 @@ describe('Property', function() {
 			});
 	    });
 	});
+	describe('#Create() -- again, for item funcs', function() {
+	    it('should create again without error', function(done) {
+	    	engine.Property.Create({
+			name : "length",
+			type : "float"
+			}, function(result, err){
+				if (err) throw err;
+	        	done();
+			});
+	    });
+	});
 
 });
 
 describe('Actor', function() {
+	describe('#Create()', function() {
+    	it('should create actor without error', function(done) {
+	    	engine.Actor.Create({
+			id : "2197054087", 
+			behaviors :[
+				{
+					behavior: "like",
+					item : "HZNP",
+					value: 1.0,
+					created: 1446417346
+				}]
+			}, function(result, err){
+				if (err) throw err;
+	        	done();
+			});
+	    });
+	});
 	describe('#AddBehaviors()', function() {
     	it('should addBehaviors without error', function(done) {
 	    	engine.Actor.AddBehaviors({
@@ -66,21 +94,25 @@ describe('Actor', function() {
 			});
 	    });
 	});
+	describe('#Remove()', function() {
+	    it('should remove without error', function(done) {
+	    	engine.Actor.Remove({
+			id : "2197054087"
+			}, function(result, err){
+				if (result) throw result;
+	        	done();
+			});
+	    });
+	});
 });
 
 
-engine.Property.Create({
-	name : "length",
-	type : "float"
-	}, function(result, err){
-		if (err) throw err;
-});
 
 describe('Item', function() {
 	describe('#Create()', function() {
 	    it('should retrieve without error', function(done) {
 	    	engine.Item.Create({
-			id : "9342",
+			id : "JJJJ",
 			}, function(result, err){
 				if (err) throw err;
 	        	done();
@@ -90,7 +122,7 @@ describe('Item', function() {
 	describe('#AddProperties()', function() {
 	    it('should add properties without error', function(done) {
 	    	engine.Item.AddProperties({
-			id : "JJJJ",
+			id : "HZNP",
 			properties: {
 				"length": 5.0
 			}
@@ -103,7 +135,7 @@ describe('Item', function() {
 	describe('#AddTags()', function() {
 	    it('should add tags without error', function(done) {
 	    	engine.Item.AddTags({
-			id : "JJJJ",
+			id : "HZNP",
 			tags: ["sweet"]
 			}, function(result, err){
 				if (err) throw err;
@@ -142,23 +174,73 @@ describe('Behavior', function() {
 	describe('#Retrieve()', function() {
 	    it('should retrieve without error', function(done) {
 	    	engine.Behavior.Retrieve({
-			name : "share",
+			name : "share"
 			}, function(result, err){
 				if (err) throw err;
 	        	done();
 			});
 	    });
 	});
-	// describe('#Remove()', function() {
-	//     it('should remove without error', function(done) {
-	//     	engine.Behavior.Remove({
-	// 		name : "share",
-	// 		}, function(result, err){
-	// 			if (err) throw err;
-	//         	done();
-	// 		});
-	//     });
-	// });
-
+	describe('#Remove()', function() {
+	    it('should remove without error', function(done) {
+	    	engine.Behavior.Remove({
+			name : "share",
+			}, function(result, err){
+				if (result) throw result;
+	        	done();
+			});
+	    });
+	});
 });
+
+describe('Discover', function() {
+	describe('#Recommended()', function() {
+	    it('should return without error', function(done) {
+	    	engine.Discover.Recommended({
+			id : "2197054086"
+			}, function(result, err){
+				if (err) throw err;
+	        	done();
+			});
+	    });
+	});
+	describe('#Similar()', function() {
+	    it('should return without error', function(done) {
+	    	engine.Discover.Similar({
+			id : "HZNP"
+			}, function(result, err){
+				if (err) throw err;
+	        	done();
+			});
+	    });
+	});
+	describe('#RecommendedSimilar()', function() {
+	    it('should return without error', function(done) {
+	    	engine.Discover.RecommendedSimilar({
+			actor : "2197054086",
+			item : "HZNP"
+			}, function(result, err){
+				if (err) throw err;
+	        	done();
+			});
+	    });
+	});
+	describe('#Popular()', function() {
+	    it('should return without error', function(done) {
+	    	engine.Discover.Popular({}, function(result, err){
+				if (err) throw err;
+	        	done();
+			});
+	    });
+	});
+	describe('#Hot()', function() {
+	    it('should return without error', function(done) {
+	    	engine.Discover.Hot({}, function(result, err){
+				if (err) throw err;
+	        	done();
+			});
+	    });
+	});
+});
+
 

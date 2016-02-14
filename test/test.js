@@ -93,40 +93,6 @@ describe('Event', function() {
 	});
 });
 
-describe('Property', function() {
-	describe('#Create()', function() {
-	    it('should create property \'clothing_type\' without error', function(done) {
-	    	engine.Property.Create({
-			name : "clothing_type",
-			type : "string"
-			}, function(result, err){
-				if (err) throw err;
-	        	done();
-			});
-	    });
-	});
-	describe('#Create()', function() {
-	    it('should create property \'stock\' without error', function(done) {
-	    	engine.Property.Create({
-			name : "stock",
-			type : "float"
-			}, function(result, err){
-				if (err) throw err;
-	        	done();
-			});
-	    });
-	});
-	describe('#Retrieve()', function() {
-	    it('should retrieve without error', function(done) {
-	    	engine.Property.Retrieve({
-			name : "clothing_type"
-			}, function(result, err){
-				if (err) throw err;
-	        	done();
-			});
-	    });
-	});
-});
 
 describe('Item', function() {
 	describe('#Create()', function() {

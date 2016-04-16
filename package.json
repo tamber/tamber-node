@@ -1,6 +1,6 @@
 {
   "name": "tamber",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Tamber API",
   "homepage": "https://github.com/tamber/tamber-node",
   "author": "Tamber <team@tamber.com> (https://tamber.com/)",
@@ -29,7 +29,7 @@
   },
   "license": "MIT",
   "scripts": {
-
+    "test": "npm run mocha"
   },
   "keywords": [
     "tamber",

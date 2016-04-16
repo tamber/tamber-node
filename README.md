@@ -1,4 +1,4 @@
-# Tamber API Client for Node.js
+# Tamber API Client for Node.js [![Build Status](https://travis-ci.org/tamber/tamber-node.svg?branch=master)](https://travis-ci.org/tamber/tamber-node)
 
 You can sign up for a Tamber account at https://tamber.com.
 

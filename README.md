@@ -31,7 +31,7 @@ mytamber.Event.Track({
     user: "user_rlox8k927z7p",
     behavior: "like",
     item: "item_wmt4fn6o4zlk",
-}, function(result, err) {
+}, function(err, result) {
     if (err) {
         console.log("Request failed with error: " + err);
     } else {
@@ -49,7 +49,7 @@ var mytamber = tamber.New('key_sBW1WHQ4bP4Ryfz3AQOo', null);
 
 mytamber.Discover.Recommended({
     user: "user_rlox8k927z7p"
-}, function(result, err) {
+}, function(err, result) {
     if (err) {
         console.log("Request failed with error: " + err);
     } else {

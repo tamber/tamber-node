@@ -2,11 +2,11 @@ var tamber = require('../lib/Tamber');
 var assert = require('assert');
 
 var testClient = {
-	ApiUrl : "https://api.tamber.com/v1",
+	ApiUrl : "https://works.tamber.com/v1",
 	DefaultTimeout: 80
 }
 
-var engine = tamber.New('SbWYPBNdARfIDa0IIO9L', testClient);
+var engine = tamber.New('SJ4lyV9DTWY9eb2Pft1Q', testClient);
 
 var behavior_1 = "mention";
 var user_1 = "user_jctzgisbru";
@@ -31,7 +31,7 @@ describe('Behavior', function() {
 	    	engine.Behavior.Create({
 			name : behavior_1,
 			desirability: 0.6
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -41,7 +41,7 @@ describe('Behavior', function() {
 	    it('should retrieve without error', function(done) {
 	    	engine.Behavior.Retrieve({
 			name : behavior_1
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -59,7 +59,7 @@ describe('Event', function() {
 			item: item_1,
 			// hit: true,
 			// context: "mobile"
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -69,7 +69,7 @@ describe('Event', function() {
 	    it('should retrieve without error', function(done) {
 	    	engine.Event.Retrieve({
 			user : user_1,
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 				var fmatch = filterMatch({
 						user: user_1,
@@ -83,7 +83,7 @@ describe('Event', function() {
 	    it('should retrieve without error', function(done) {
 	    	engine.Event.Retrieve({
 			item : item_1,
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 				var fmatch = filterMatch({
 						item: item_1,
@@ -97,7 +97,7 @@ describe('Event', function() {
 	    it('should retrieve without error', function(done) {
 	    	engine.Event.Retrieve({
 			behavior : behavior_1,
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 				var fmatch = filterMatch({
 						behavior : behavior_1
@@ -112,7 +112,7 @@ describe('Event', function() {
 	    	engine.Event.Retrieve({
 			created_since : t_1,
 			created_before: currentTime(),
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -124,7 +124,7 @@ describe('Event', function() {
 			user : user_1,
 			created_since : t_1,
 			created_before: currentTime(),
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 				var fmatch = filterMatch({
 						user: user_1,
@@ -140,7 +140,7 @@ describe('Event', function() {
 			item : item_1,
 			created_since : t_1,
 			created_before: currentTime(),
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 				var fmatch = filterMatch({
 						item: item_1,
@@ -156,7 +156,7 @@ describe('Event', function() {
 			behavior : behavior_1,
 			created_since : t_1,
 			created_before: currentTime(),
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 				var fmatch = filterMatch({
 						behavior : behavior_1
@@ -173,7 +173,7 @@ describe('Event', function() {
 			behavior : behavior_1,
 			created_since : t_1,
 			created_before: currentTime(),
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 				var fmatch = filterMatch({
 						user: user_1,
@@ -191,7 +191,7 @@ describe('Event', function() {
 			behavior : behavior_1,
 			created_since : t_1,
 			created_before: currentTime(),
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 				var fmatch = filterMatch({
 						item: item_1,
@@ -237,7 +237,7 @@ describe('Event', function() {
 						behavior: behavior_1,
 					}
 				]
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -256,7 +256,7 @@ describe('Item', function() {
 				"stock":         90,
 			},
 			tags: ["casual", "feminine"]
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -274,7 +274,7 @@ describe('Item', function() {
 					tags: ["casual"],
 				}
 			}
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -284,7 +284,7 @@ describe('Item', function() {
 	    it('should retrieve without error', function(done) {
 	    	engine.Item.Retrieve({
 			id : item_5
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -294,7 +294,7 @@ describe('Item', function() {
 	    it('should remove without error', function(done) {
 	    	engine.Item.Remove({
 			id : item_4
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -305,7 +305,7 @@ describe('Item', function() {
 	    	engine.Item.Update({
 			id : item_4,
 			updates : {}
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -315,7 +315,7 @@ describe('Item', function() {
 	    it('should retrieve without error', function(done) {
 	    	engine.Item.Retrieve({
 			id : item_5
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -329,7 +329,7 @@ describe('Discover', function() {
 	    	engine.Discover.Recommended({
 			user : user_1,
 			number: 5,
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -340,7 +340,7 @@ describe('Discover', function() {
 	    	engine.Discover.Similar({
 			item : item_1,
 			number: 10
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -351,7 +351,7 @@ describe('Discover', function() {
 	    	engine.Discover.RecommendedSimilar({
 			user : user_1,
 			item : item_1
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -359,7 +359,7 @@ describe('Discover', function() {
 	});
 	describe('#Popular()', function() {
 	    it('should return without error', function(done) {
-	    	engine.Discover.Popular({}, function(result, err){
+	    	engine.Discover.Popular({}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -367,7 +367,7 @@ describe('Discover', function() {
 	});
 	describe('#Hot()', function() {
 	    it('should return without error', function(done) {
-	    	engine.Discover.Hot({}, function(result, err){
+	    	engine.Discover.Hot({}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -393,7 +393,7 @@ describe('User', function() {
 					behavior: behavior_1,
 				}
 			]
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -408,7 +408,7 @@ describe('User', function() {
 				"age":  "55-65",
 				"name": "Rob Pike",
 			}
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});
@@ -418,7 +418,7 @@ describe('User', function() {
 	    it('should retrieve without error', function(done) {
 	    	engine.User.Retrieve({
 			id : user_4
-			}, function(result, err){
+			}, function(err, result){
 				if (err) throw err;
 	        	done();
 			});

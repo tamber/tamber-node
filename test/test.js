@@ -2,11 +2,12 @@ var tamber = require('../lib/Tamber');
 var assert = require('assert');
 
 var testClient = {
-	ApiUrl : "https://works.tamber.com/v1",
-	DefaultTimeout: 80
+	ApiUrl : "https://api.tamber.com/v1",
+	DefaultTimeout: 80,
+	// ApiVersion: "2016-4-9"
 }
 
-var engine = tamber.New('SJ4lyV9DTWY9eb2Pft1Q', testClient);
+var engine = tamber.New('SbWYPBNdARfIDa0IIO9L', testClient);
 
 var behavior_1 = "mention";
 var user_1 = "user_jctzgisbru";

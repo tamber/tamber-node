@@ -1,2 +1,9 @@
+1.0.1 5-20-2016
+	Version 1.0.1
+	- Api version handling
+	- Get requests updated
+	- Error, Result order flipped in callback func
+	- HTTP headers supplied by client object for minor efficiency gain
+
 1.0.0 4-15-2016
 	Version 1.0

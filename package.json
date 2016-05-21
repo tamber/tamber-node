@@ -3,6 +3,10 @@
   "version": "1.0.2",
   "description": "Tamber API",
   "homepage": "https://github.com/tamber/tamber-node",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/tamber/tamber-node.git"
+  },
   "author": "Tamber <team@tamber.com> (https://tamber.com/)",
   "contributors": [
     "Alexi Robbins <alexi@tamber.com>"

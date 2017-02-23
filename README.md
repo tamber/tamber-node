@@ -25,7 +25,7 @@ Track Events in real time:
 ```js
 var tamber = require('tamber');
 
-var mytamber = tamber.New('SbWYPBNdARfIDa0IIO9L', null);
+var mytamber = tamber.New('your_project_key', null, null);
 
 mytamber.Event.Track({
     user: "user_rlox8k927z7p",
@@ -45,7 +45,7 @@ Get recommendations:
 ```js
 var tamber = require('tamber');
 
-var mytamber = tamber.New('SbWYPBNdARfIDa0IIO9L', null);
+var mytamber = tamber.New('your_project_key', 'your_engine_key', null);
 
 mytamber.Discover.Recommended({
     user: "user_rlox8k927z7p"

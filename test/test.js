@@ -4,10 +4,10 @@ var assert = require('assert');
 var testClient = {
 	ApiUrl : "https://api.tamber.com/v1",
 	DefaultTimeout: 80,
-	// ApiVersion: "2016-4-9"
+	ApiVersion: "2017-2-8"
 }
 
-var engine = tamber.New('SbWYPBNdARfIDa0IIO9L', testClient);
+var engine = tamber.New('Mu6DUPXdDYe98cv5JIfX', 'SbWYPBNdARfIDa0IIO9L', testClient);
 
 var behavior_1 = "mention";
 var user_1 = "user_jctzgisbru";

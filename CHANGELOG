@@ -1,3 +1,9 @@
+1.0.3 2-22-2017
+	Version 1.0.3
+	- Support for project keys
+	- Updated api syntax (underscore casing made consistent)
+	- Api Version set by default to 2017-2-8, which contained naming changes
+
 1.0.1 5-20-2016
 	Version 1.0.1
 	- Api version handling

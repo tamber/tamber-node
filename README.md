@@ -54,8 +54,6 @@ mytamber.Event.Track({
 });
 ```
 
-Note that the Item Update method will automatically create novel items.
-
 ### Discover
 
 In addition to recommendations, Tamber allows you to find similar item matches, similar items given a user, popular and hot items.
@@ -112,6 +110,8 @@ mytamber.Item.Update({
     item; // the updated item object
 });
 ```
+
+Note that the Item Update method will automatically create novel items.
 
 ### Configuration
 

@@ -37,7 +37,7 @@ mytamber.Discover.Recommended({
 
 ### Track real time Events
 
-Track all of your events (user-item interactions in your app) to your project in real time, just like you would for a data analytics service.
+Track all of your events (user-item interactions in your app) to your project in real time, just like you would for a data analytics service. Note that novel users and items will automatically be created.
 
 ```js
 var tamber = require('tamber');

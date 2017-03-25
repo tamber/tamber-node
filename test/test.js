@@ -1,13 +1,7 @@
 var tamber = require('../lib/Tamber');
 var assert = require('assert');
 
-var testClient = {
-	ApiUrl : "https://api.tamber.com/v1",
-	DefaultTimeout: 80,
-	ApiVersion: "2017-3-8"
-}
-
-var mytamber = tamber.New('Mu6DUPXdDYe98cv5JIfX', 'SbWYPBNdARfIDa0IIO9L', testClient);
+var mytamber = tamber.New('Mu6DUPXdDYe98cv5JIfX', 'SbWYPBNdARfIDa0IIO9L', null);
 
 var behavior_1 = "mention";
 var user_1 = "user_jctzgisbru";

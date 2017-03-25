@@ -1,7 +1,12 @@
 var tamber = require('../lib/Tamber');
 var assert = require('assert');
 
-var mytamber = tamber.New('Mu6DUPXdDYe98cv5JIfX', 'SbWYPBNdARfIDa0IIO9L', null);
+var testClient = {
+	DefaultTimeout: 80,
+	ApiVersion: "2017-3-8"
+}
+
+var mytamber = tamber.New('Mu6DUPXdDYe98cv5JIfX', 'SbWYPBNdARfIDa0IIO9L', testClient);
 
 var behavior_1 = "mention";
 var user_1 = "user_jctzgisbru";
@@ -325,7 +330,7 @@ describe('Tamber Test', function() {
 		    it('should return without error', function(done) {
 		    	mytamber.Discover.Recommended({
 				user : user_1,
-				number: 5,
+				number: 5
 				}, function(err, result){
 					if (err) throw err;
 		        	done();

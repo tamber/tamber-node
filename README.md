@@ -33,7 +33,7 @@ tamber.discover.recommended({
 });
 ```
 
-To initialize your tamber instance on ES6:
+To initialize your `tamber` instance on ES6:
 
 ```js
 import tamberPkg from 'tamber';
@@ -59,7 +59,7 @@ tamber.event.track({
 
 ### Discover
 
-In addition to recommendations, Tamber allows you to find similar item matches, similar items given a user, popular and hot items.
+In addition to recommendations, Tamber allows you to find similar item matches, similar items given a user, and popular and hot items.
 
 ```js
 var tamber = require('tamber')('project_key', 'engine_key');
@@ -92,7 +92,7 @@ tamber.discover.hot({}, function(err, discoveries) {
 
 ### Item properties
 
-Setting your items' properties (optional!) allows you to filter recommendations (ex. items under $100), and build engines from subsets of your catalogue (ex. a recommendation engine just for your socks. Why not?). You can optionally include item properties in recommendation responses as well.
+Setting your items' properties (optional!) allows you to filter recommendations (ex. only recommend items under $100), and build engines from subsets of your catalogue (ex. a recommendation engine for artists, and an engine for songs). You can optionally include item properties in recommendation responses as well.
 
 ```js
 tamber.item.update({

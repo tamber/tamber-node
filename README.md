@@ -37,7 +37,7 @@ To initialize your `tamber` instance on ES6:
 
 ```js
 import tamberPkg from 'tamber';
-const tamber = tamberPkg('project_key', 'engine_key')
+const tamber = tamberPkg('project_key', 'engine_key');
 ```
 
 ### Track real time Events

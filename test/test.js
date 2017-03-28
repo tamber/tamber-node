@@ -1,12 +1,5 @@
-var tamber = require('../lib/Tamber');
+var tamber = require('../lib/Tamber')('Mu6DUPXdDYe98cv5JIfX', 'SbWYPBNdARfIDa0IIO9L');
 var assert = require('assert');
-
-var testClient = {
-	DefaultTimeout: 80,
-	ApiVersion: "2017-3-8"
-}
-
-var mytamber = tamber.New('Mu6DUPXdDYe98cv5JIfX', 'SbWYPBNdARfIDa0IIO9L', testClient);
 
 var behavior_1 = "mention";
 var user_1 = "user_jctzgisbru";
@@ -26,11 +19,11 @@ var t_2 = 1454465400;
 var tc = Math.floor(Date.now() / 1000);
 
 describe('Tamber Test', function() {
-	this.timeout(testClient.DefaultTimeout*1000);
+	this.timeout(tamber.getAttribute('timeout')*1000);
 	describe('Behavior', function() {
 		describe('#Create()', function() {
 		    it('should create without error', function(done) {
-		    	mytamber.Behavior.Create({
+		    	tamber.behavior.create({
 				name : behavior_1,
 				desirability: 0.6
 				}, function(err, result){
@@ -41,7 +34,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Retrieve()', function() {
 		    it('should retrieve without error', function(done) {
-		    	mytamber.Behavior.Retrieve({
+		    	tamber.behavior.retrieve({
 				name : behavior_1
 				}, function(err, result){
 					if (err) throw err;
@@ -55,7 +48,7 @@ describe('Tamber Test', function() {
 
 		describe('#Track()', function() {
 		    it('should track without error', function(done) {
-		    	mytamber.Event.Track({
+		    	tamber.event.track({
 				user : user_1,
 				behavior : behavior_1,
 				item: item_1,
@@ -69,7 +62,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Retrieve() - user', function() {
 		    it('should retrieve without error', function(done) {
-		    	mytamber.Event.Retrieve({
+		    	tamber.event.retrieve({
 				user : user_1,
 				}, function(err, result){
 					if (err) throw err;
@@ -83,7 +76,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Retrieve() - item', function() {
 		    it('should retrieve without error', function(done) {
-		    	mytamber.Event.Retrieve({
+		    	tamber.event.retrieve({
 				item : item_1,
 				}, function(err, result){
 					if (err) throw err;
@@ -97,7 +90,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Retrieve() - behavior', function() {
 		    it('should retrieve without error', function(done) {
-		    	mytamber.Event.Retrieve({
+		    	tamber.event.retrieve({
 				behavior : behavior_1,
 				}, function(err, result){
 					if (err) throw err;
@@ -111,7 +104,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Retrieve() - created_since, created_before', function() {
 		    it('should retrieve without error', function(done) {
-		    	mytamber.Event.Retrieve({
+		    	tamber.event.retrieve({
 				created_since : t_1,
 				created_before: currentTime(),
 				}, function(err, result){
@@ -122,7 +115,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Retrieve() - user, created_since, created_before', function() {
 		    it('should retrieve without error', function(done) {
-		    	mytamber.Event.Retrieve({
+		    	tamber.event.retrieve({
 				user : user_1,
 				created_since : t_1,
 				created_before: currentTime(),
@@ -138,7 +131,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Retrieve() - item, created_since, created_before', function() {
 		    it('should retrieve without error', function(done) {
-		    	mytamber.Event.Retrieve({
+		    	tamber.event.retrieve({
 				item : item_1,
 				created_since : t_1,
 				created_before: currentTime(),
@@ -154,7 +147,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Retrieve() - behavior, created_since, created_before', function() {
 		    it('should retrieve without error', function(done) {
-		    	mytamber.Event.Retrieve({
+		    	tamber.event.retrieve({
 				behavior : behavior_1,
 				created_since : t_1,
 				created_before: currentTime(),
@@ -170,7 +163,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Retrieve() - user, behavior, created_since, created_before', function() {
 		    it('should retrieve without error', function(done) {
-		    	mytamber.Event.Retrieve({
+		    	tamber.event.retrieve({
 		    	user: user_1,
 				behavior : behavior_1,
 				created_since : t_1,
@@ -188,7 +181,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Retrieve() - item, behavior, created_since, created_before', function() {
 		    it('should retrieve without error', function(done) {
-		    	mytamber.Event.Retrieve({
+		    	tamber.event.retrieve({
 		    	item: item_1,
 				behavior : behavior_1,
 				created_since : t_1,
@@ -206,7 +199,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Batch()', function() {
 		    it('should batch without error', function(done) {
-		    	mytamber.Event.Batch({
+		    	tamber.event.batch({
 				events : [
 						{
 							user:     user_2,
@@ -251,7 +244,7 @@ describe('Tamber Test', function() {
 	describe('Item', function() {
 		describe('#Create()', function() {
 		    it('should create without error', function(done) {
-		    	mytamber.Item.Create({
+		    	tamber.item.create({
 				id : item_5,
 				properties: {
 					"clothing_type": "pants",
@@ -266,7 +259,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Update()', function() {
 		    it('should update without error', function(done) {
-		    	mytamber.Item.Update({
+		    	tamber.item.update({
 				id : item_5,
 				updates: {
 					add: {
@@ -284,7 +277,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Retrieve()', function() {
 		    it('should retrieve without error', function(done) {
-		    	mytamber.Item.Retrieve({
+		    	tamber.item.retrieve({
 				id : item_5
 				}, function(err, result){
 					if (err) throw err;
@@ -294,7 +287,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Remove()', function() {
 		    it('should remove without error', function(done) {
-		    	mytamber.Item.Remove({
+		    	tamber.item.remove({
 				id : item_4
 				}, function(err, result){
 					if (err) throw err;
@@ -304,7 +297,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Update() after #Remove()', function() {
 		    it('should update and reintroduce previously removed item without error', function(done) {
-		    	mytamber.Item.Update({
+		    	tamber.item.update({
 				id : item_4,
 				updates : {}
 				}, function(err, result){
@@ -315,7 +308,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Retrieve() ater #Remove() then #Update()', function() {
 		    it('should retrieve without error', function(done) {
-		    	mytamber.Item.Retrieve({
+		    	tamber.item.retrieve({
 				id : item_5
 				}, function(err, result){
 					if (err) throw err;
@@ -328,7 +321,7 @@ describe('Tamber Test', function() {
 	describe('Discover', function() {
 		describe('#Recommended()', function() {
 		    it('should return without error', function(done) {
-		    	mytamber.Discover.Recommended({
+		    	tamber.discover.recommended({
 				user : user_1,
 				number: 5
 				}, function(err, result){
@@ -339,7 +332,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Similar()', function() {
 		    it('should return without error', function(done) {
-		    	mytamber.Discover.Similar({
+		    	tamber.discover.similar({
 				item : item_1,
 				number: 10
 				}, function(err, result){
@@ -350,7 +343,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#RecommendedSimilar()', function() {
 		    it('should return without error', function(done) {
-		    	mytamber.Discover.RecommendedSimilar({
+		    	tamber.discover.recommendedSimilar({
 				user : user_1,
 				item : item_1
 				}, function(err, result){
@@ -361,7 +354,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Popular()', function() {
 		    it('should return without error', function(done) {
-		    	mytamber.Discover.Popular({}, function(err, result){
+		    	tamber.discover.popular({}, function(err, result){
 					if (err) throw err;
 		        	done();
 				});
@@ -369,7 +362,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Hot()', function() {
 		    it('should return without error', function(done) {
-		    	mytamber.Discover.Hot({}, function(err, result){
+		    	tamber.discover.hot({}, function(err, result){
 					if (err) throw err;
 		        	done();
 				});
@@ -380,7 +373,7 @@ describe('Tamber Test', function() {
 	describe('User', function() {
 		describe('#Create()', function() {
 	    	it('should create actor without error', function(done) {
-		    	mytamber.User.Create({
+		    	tamber.user.create({
 				id : user_4, 
 				metadata: {
 					"city": "San Francisco, CA",
@@ -403,7 +396,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Update()', function() {
 	    	it('should addBehaviors without error', function(done) {
-		    	mytamber.User.Update({
+		    	tamber.user.update({
 				id : user_4, 
 				metadata: {
 					"city": "Mountain View, CA",
@@ -418,7 +411,7 @@ describe('Tamber Test', function() {
 		});
 		describe('#Retrieve()', function() {
 		    it('should retrieve without error', function(done) {
-		    	mytamber.User.Retrieve({
+		    	tamber.user.retrieve({
 				id : user_4
 				}, function(err, result){
 					if (err) throw err;

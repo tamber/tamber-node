@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/tamber/tamber-node.svg?branch=master)](https://travis-ci.org/tamber/tamber-node)
 [![Try on RunKit](https://badge.runkitcdn.com/tamber.svg)](https://runkit.com/npm/tamber)
 
-Recommendation engines for developers. Build blazing fast, headscratchingly-accurate hosted recommendation engines in minutes.
+Recommendation engines for developers, easy as π. Build blazing fast, head-scratchingly accurate hosted recommendation engines in minutes.
 
 [Get a free api key][homepage] to create your first project.
 
@@ -23,11 +23,9 @@ npm install tamber --save
 Every resource is accessed via your `tamber` instance.
 
 ```js
-var tamber = require('tamber');
+var tamber = require('tamber')('your_project_key', 'your_engine_key');
 
-var mytamber = tamber.New('your_project_key', 'your_engine_key', null);
-
-mytamber.Discover.Recommended({
+tamber.discover.recommended({
     user: "user_rlox8k927z7p"
 }, function(err, recs) {
     err; // null if no error occurred 
@@ -35,16 +33,21 @@ mytamber.Discover.Recommended({
 });
 ```
 
+To initialize your tamber instance on ES6:
+
+```js
+import tamberPkg from 'tamber';
+const tamber = tamberPkg('project_key', 'engine_key')
+```
+
 ### Track real time Events
 
 Track all of your events (user-item interactions in your app) to your project in real time, just like you would for a data analytics service. Note that novel users and items will automatically be created.
 
 ```js
-var tamber = require('tamber');
+var tamber = require('tamber')('project_key');
 
-var mytamber = tamber.New('your_project_key', null, null);
-
-mytamber.Event.Track({
+tamber.event.track({
     user: "user_rlox8k927z7p",
     behavior: "like",
     item: "item_wmt4fn6o4zlk",
@@ -59,16 +62,16 @@ mytamber.Event.Track({
 In addition to recommendations, Tamber allows you to find similar item matches, similar items given a user, popular and hot items.
 
 ```js
-var mytamber = tamber.New('your_project_key', 'your_engine_key', null);
+var tamber = require('tamber')('project_key', 'engine_key');
 
-mytamber.Discover.Similar({
+tamber.discover.similar({
     item: "item_wmt4fn6o4zlk"
 }, function(err, discoveries) {
     err; // null if no error occurred 
     discoveries; // the similar items
 });
 
-mytamber.Discover.RecommendedSimilar({
+tamber.discover.recommendedSimilar({
     user: "user_rlox8k927z7p",
     item: "item_wmt4fn6o4zlk"
 }, function(err, discoveries) {
@@ -76,12 +79,12 @@ mytamber.Discover.RecommendedSimilar({
     discoveries; // the similar items
 });
 
-mytamber.Discover.Popular({}, function(err, discoveries) {
+tamber.discover.popular({}, function(err, discoveries) {
     err; // null if no error occurred 
     discoveries; // the most popular items
 });
 
-mytamber.Discover.Hot({}, function(err, discoveries) {
+tamber.discover.hot({}, function(err, discoveries) {
     err; // null if no error occurred 
     discoveries; // the hottest (trending) items
 });
@@ -92,7 +95,7 @@ mytamber.Discover.Hot({}, function(err, discoveries) {
 Setting your items' properties (optional!) allows you to filter recommendations (ex. items under $100), and build engines from subsets of your catalogue (ex. a recommendation engine just for your socks. Why not?). You can optionally include item properties in recommendation responses as well.
 
 ```js
-mytamber.Item.Update({
+tamber.item.update({
     id: "item_wmt4fn6o4zlk",
     updates: {
         add: {
@@ -111,19 +114,27 @@ mytamber.Item.Update({
 });
 ```
 
-Note that the Item Update method will automatically create novel items.
+Note that the item update method will automatically create novel items.
 
 ### Configuration
 
-You can pass a client config object when creating your `tamber` instance to set the Timeout and/or the ApiVersion:
+You can set the Timeout and Api Version of a `tamber` instance:
 
 ```js
-var config = {
-    DefaultTimeout: 80,
-    ApiVersion: "2017-3-8"
-}
+tamber.setTimeout(40000); // in ms
+tamber.setApiVersion("2017-3-8");
+```
 
-var mytamber = tamber.New('your_project_key', 'your_engine_key', config);
+### Multiple Engines
+
+You can easily create multiple `tamber` instances to interface with each of your engines and projects.
+
+```js
+var tamberPkg = require('../lib/Tamber');
+
+var tamber_1 = new tamberPackage('project_key_A','engine_key_A1'),
+    tamber_2 = new tamberPackage('project_key_A','engine_key_A2'),
+    tamber_3 = new tamberPackage('project_key_B','engine_key_B1');
 ```
 
 See [test.js](https://github.com/tamber/tamber-node/blob/master/test/test.js) for more examples.

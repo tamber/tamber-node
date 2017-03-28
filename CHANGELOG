@@ -1,3 +1,9 @@
+1.0.6 3-27-2017
+	Version 1.0.6
+	- Move to prototype with simpler initialization
+	- Lowercase objects and method calls
+	- README updated and expanded upon
+
 1.0.3 2-22-2017
 	Version 1.0.3
 	- Support for project keys

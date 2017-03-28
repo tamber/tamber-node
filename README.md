@@ -132,9 +132,9 @@ You can easily create multiple `tamber` instances to interface with each of your
 ```js
 var tamberPkg = require('../lib/Tamber');
 
-var tamber_1 = new tamberPackage('project_key_A','engine_key_A1'),
-    tamber_2 = new tamberPackage('project_key_A','engine_key_A2'),
-    tamber_3 = new tamberPackage('project_key_B','engine_key_B1');
+var tamber_1 = new tamberPkg('project_key_A','engine_key_A1'),
+    tamber_2 = new tamberPkg('project_key_A','engine_key_A2'),
+    tamber_3 = new tamberPkg('project_key_B','engine_key_B1');
 ```
 
 See [test.js](https://github.com/tamber/tamber-node/blob/master/test/test.js) for more examples.

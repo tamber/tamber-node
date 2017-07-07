@@ -116,6 +116,21 @@ tamber.item.update({
 
 Note that the item update method will automatically create novel items.
 
+### Anonymous / Signed-Out Users
+
+If your app allows users to interact with content before creating an account, or when they are logged out, but you have some unique identifier (like the ip-address or device-id) you may set the user to this id and track events as normal. Then, when the user creates an account or logs in, you can `merge` the anonymous user profile into the logged-in user profile.
+
+```js
+tamber.user.merge({
+    from: "ip-216.3.128.12",
+    to: "user_rlox8k927z7p"
+}, function(err, user) {
+    err; // null if no error occurred 
+    user; // the updated user merged to
+});
+```
+
+
 ### Configuration
 
 You can set the Timeout and Api Version of a `tamber` instance:

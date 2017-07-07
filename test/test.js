@@ -52,8 +52,8 @@ describe('Tamber Test', function() {
 				user : user_1,
 				behavior : behavior_1,
 				item: item_1,
-				// hit: true,
-				// context: "mobile"
+				hit: true,
+				context:["recommended"]
 				}, function(err, result){
 					if (err) throw err;
 		        	done();
@@ -413,6 +413,18 @@ describe('Tamber Test', function() {
 		    it('should retrieve without error', function(done) {
 		    	tamber.user.retrieve({
 				id : user_4
+				}, function(err, result){
+					if (err) throw err;
+		        	done();
+				});
+		    });
+		});
+		describe('#Search()', function() {
+		    it('should search without error', function(done) {
+		    	tamber.user.search({
+				filter : {
+					"city": "Mountain View, CA"
+					}
 				}, function(err, result){
 					if (err) throw err;
 		        	done();

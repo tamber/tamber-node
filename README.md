@@ -53,7 +53,7 @@ tamber.event.track({
     item: "item_wmt4fn6o4zlk",
 }, function(err, event) {
     err; // null if no error occurred 
-    item; // the tracked event object
+    event; // the tracked event object
 });
 ```
 
@@ -140,5 +140,5 @@ var tamber_1 = new tamberPkg('project_key_A','engine_key_A1'),
 See [test.js](https://github.com/tamber/tamber-node/blob/master/test/test.js) for more examples.
 
 [homepage]: https://tamber.com/
-[docs]: https://tamber.com/docs/api/
+[docs]: https://tamber.com/docs/
 [dashboard]: https://dashboard.tamber.com/

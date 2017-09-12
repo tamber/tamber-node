@@ -352,6 +352,17 @@ describe('Tamber Test', function() {
 				});
 		    });
 		});
+		describe('#Next()', function() {
+		    it('should return without error', function(done) {
+		    	tamber.discover.next({
+				user : user_1,
+				item : item_1
+				}, function(err, result){
+					if (err) throw err;
+		        	done();
+				});
+		    });
+		});
 		describe('#Popular()', function() {
 		    it('should return without error', function(done) {
 		    	tamber.discover.popular({}, function(err, result){

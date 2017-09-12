@@ -137,7 +137,7 @@ You can set the Timeout and Api Version of a `tamber` instance:
 
 ```js
 tamber.setTimeout(40000); // in ms
-tamber.setApiVersion("2017-3-8");
+tamber.setApiVersion("2017-7-3");
 ```
 
 ### Multiple Engines

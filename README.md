@@ -23,13 +23,14 @@ npm install tamber --save
 Every resource is accessed via your `tamber` instance.
 
 ```js
-var tamber = require('tamber')('your_project_key', 'your_engine_key');
+var tamber = require('tamber')('your_project_key');
 
-tamber.discover.recommended({
-    user: "user_rlox8k927z7p"
+tamber.discover.next({
+    user: "user_rlox8k927z7p",
+    number: 8
 }, function(err, recs) {
     err; // null if no error occurred 
-    recs; // the recommended items for the user (20 items by default)
+    recs; // the recommended items for the user
 });
 ```
 
@@ -37,7 +38,39 @@ To initialize your `tamber` instance on ES6:
 
 ```js
 import tamberPkg from 'tamber';
-const tamber = tamberPkg('project_key', 'engine_key');
+const tamber = tamberPkg('project_key');
+```
+
+### Client side initialization
+
+We recommend implementing `tamber` client-side, though you can also implement `tamber` in your backend.
+
+#### Set User
+
+Set the User wherever you load your user's unique ID from your backend, or wherever you load user ids from.
+
+```js
+tamber.setUser("user_id");
+```
+
+#### Track Guests (Anonymous / Signed-Out Users)
+
+If you would like to personalize your app for guest users, you can use tamber's built-in guest user handling. It will automatically create a temporary user. Then, when a user signs in or creates an account, simply call `setUser` as normal and tamber will automatically `merge` the temporary user to the signed-in user account so their recommendations remain consistent.
+
+```js
+var tamber = require('tamber')('your_project_key');
+tamber.setTrackGuests(true);
+```
+
+If you already handle guest user accounts internally and want to handle this manually, just call `user.merge` when a guest user signs in or creates account.
+
+```js
+tamber.user.merge({
+    from: "temporary/guest_user_id", 
+    to: "signed_in_user_id"
+}, function(err, result) {
+     err; // null if no error occurred 
+});
 ```
 
 ### Track real time Events
@@ -48,9 +81,11 @@ Track all of your events (user-item interactions in your app) to your project in
 var tamber = require('tamber')('project_key');
 
 tamber.event.track({
-    user: "user_rlox8k927z7p",
     behavior: "like",
     item: "item_wmt4fn6o4zlk",
+
+    // if implementing server-side, set the user field
+    user: "user_rlox8k927z7p",
 }, function(err, event) {
     err; // null if no error occurred 
     event; // the tracked event object
@@ -59,10 +94,46 @@ tamber.event.track({
 
 ### Discover
 
-In addition to recommendations, Tamber allows you to find similar item matches, similar items given a user, and popular and hot items.
+Once you have created your engine, you may begin using `discover` to put personalized recommendations in your app.
+
+The primary method of discovery in Tamber is the `discover.next` method. `discover.next` returns the optimal set of items that the user should see next. Simply call it at the time that the page loads with the current item – or, if displaying recommendations to the user in a recommended section, you can also call it with only the user set.
 
 ```js
-var tamber = require('tamber')('project_key', 'engine_key');
+var tamber = require('tamber')('project_key');
+
+// client-side implementation only
+tamber.setTrackGuests(true);
+tamber.setUser("user_id");
+
+tamber.discover.next({
+    item: "item_wmt4fn6o4zlk"
+}, function(err, discoveries) {
+    err; // null if no error occurred 
+    discoveries; // the similar items
+});
+```
+
+In addition to `discover.next`, Tamber allows you to get popular and hot items, as well as use lower-level methods to get lists of recommended items, similar item matches, and similar items for a given user.
+
+```js
+var tamber = require('tamber')('project_key');
+
+tamber.discover.popular({}, function(err, discoveries) {
+    err; // null if no error occurred 
+    discoveries; // the most popular items
+});
+
+tamber.discover.hot({}, function(err, discoveries) {
+    err; // null if no error occurred 
+    discoveries; // the hottest (trending) items
+});
+
+tamber.discover.recommended({
+    user: "user_rlox8k927z7p"
+}, function(err, discoveries) {
+    err; // null if no error occurred 
+    discoveries; // the similar items
+});
 
 tamber.discover.similar({
     item: "item_wmt4fn6o4zlk"
@@ -77,16 +148,6 @@ tamber.discover.recommendedSimilar({
 }, function(err, discoveries) {
     err; // null if no error occurred 
     discoveries; // the similar items
-});
-
-tamber.discover.popular({}, function(err, discoveries) {
-    err; // null if no error occurred 
-    discoveries; // the most popular items
-});
-
-tamber.discover.hot({}, function(err, discoveries) {
-    err; // null if no error occurred 
-    discoveries; // the hottest (trending) items
 });
 ```
 
@@ -115,21 +176,6 @@ tamber.item.update({
 ```
 
 Note that the item update method will automatically create novel items.
-
-### Anonymous / Signed-Out Users
-
-If your app allows users to interact with content before creating an account, or when they are logged out, but you have some unique identifier (like the ip-address or device-id) you may set the user to this id and track events as normal. Then, when the user creates an account or logs in, you can `merge` the anonymous user profile into the logged-in user profile.
-
-```js
-tamber.user.merge({
-    from: "ip-216.3.128.12",
-    to: "user_rlox8k927z7p"
-}, function(err, user) {
-    err; // null if no error occurred 
-    user; // the updated user merged to
-});
-```
-
 
 ### Configuration
 

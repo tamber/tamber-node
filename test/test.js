@@ -1,6 +1,8 @@
 var tamber = require('../lib/Tamber')('Mu6DUPXdDYe98cv5JIfX', 'SbWYPBNdARfIDa0IIO9L');
 var assert = require('assert');
 
+tamber.setTimeout(80000);
+
 var behavior_1 = "mention";
 var user_1 = "user_jctzgisbru";
 var user_2 = "user_y7u9sv6we0";
@@ -441,6 +443,76 @@ describe('Tamber Test', function() {
 		        	done();
 				});
 		    });
+		});
+	});
+});
+
+describe('Tamber Guest User Tracking Test', function() {
+	tamber.setTrackGuests(true);
+	it('should track without error', function(done) {
+		tamber.event.track({
+			item : item_5,
+			behavior: behavior_1
+		}, function(err, result){
+			if (err) throw err;
+			done();
+		});
+	});
+	it('should retrieve without error', function(done) {
+		tamber.event.retrieve({
+		}, function(err, result){
+			if (err) throw err;
+			done();
+		});
+	});
+	it('should batch without error', function(done) {
+		tamber.event.batch({
+			events : [
+					{
+						item:     item_2,
+						behavior: behavior_1,
+					},
+					{
+						item:     item_1,
+						behavior: behavior_1,
+					}
+				]
+		}, function(err, result){
+			if (err) throw err;
+			done();
+		});
+	});
+	it('should discover/recommended without error', function(done) {
+		tamber.discover.recommended({
+		}, function(err, result){
+			if (err) throw err;
+			done();
+		});
+	});
+	it('should discover/recommended_similar without error', function(done) {
+		tamber.discover.recommendedSimilar({
+			item:item_3
+		}, function(err, result){
+			if (err) throw err;
+			done();
+		});
+	});
+	it('should discover/recommended with test_events without error', function(done) {
+		tamber.discover.recommended({
+			item:item_3,
+			test_events:[
+				{
+					item:     item_3,
+					behavior: behavior_1,
+				},
+				{
+					item:     item_1,
+					behavior: behavior_1,
+				}
+			]
+		}, function(err, result){
+			if (err) throw err;
+			done();
 		});
 	});
 });

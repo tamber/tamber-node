@@ -1,6 +1,6 @@
 {
   "name": "tamber",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Recommendation engines for developers, easy as π. Build blazing fast, head-scratchingly accurate hosted recommendation engines in minutes.",
   "homepage": "https://github.com/tamber/tamber-node",
   "repository" : {
@@ -25,7 +25,6 @@
   },
   "dependencies": {
     "lodash": "^3.1.0",
-    "xmlhttprequest": "^1.8.0",
     "btoa": "^1.1.2",
     "qs": "^6.0.0",
     "http-proxy": "^1.12.0",

@@ -60,6 +60,11 @@ If you would like to personalize your app for guest users, you can use tamber's 
 ```js
 var tamber = require('tamber')('your_project_key');
 tamber.setTrackGuests(true);
+
+// ...guest user does stuff...
+
+// guest user creates an account / signs in
+tamber.setUser("new_signed_in_user_id");
 ```
 
 If you already handle guest user accounts internally and want to handle this manually, just call `user.merge` when a guest user signs in or creates account.

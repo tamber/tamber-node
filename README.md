@@ -138,7 +138,7 @@ If you are setting [properties for your items][properties], you can include thes
 
 `discover.next` is optimized for the exact moment and context of the user at the time of request, so standard pagination is not possible. Instead, `discover.next` uses automatic continuation to allow you to 'show more' or implement infinite scrolling. 
 
-When you want to add more recommendations to those currently displayed to the user, just set the `continuation` field to `true`. Tamber will automatically generate the set of items that should be *appended to the current user-session's list*. The `discover.next` user-session is reset when `discover.next` is called without `continuation`.
+When you want to add more recommendations to those currently displayed to the user, just set the `continuation` field to `true`. Tamber will automatically generate the set of items that should be appended to the current user-session's list. The `discover.next` user-session is reset when `discover.next` is called without `continuation`.
 
 ```js
 tamber.discover.next({

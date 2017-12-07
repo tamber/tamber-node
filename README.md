@@ -126,7 +126,7 @@ tamber.discover.next({
     // user: "user_rlox8k927z7p"
 }, function(err, discoveries) {
     err; // null if no error occurred 
-    discoveries; // the similar items
+    discoveries; // the next items
 });
 ```
 
@@ -146,13 +146,13 @@ tamber.discover.next({
     continuation: true
 }, function(err, discoveries) {
     err; // null if no error occurred 
-    discoveries; // the similar items
+    discoveries; // the next items
 });
 ```
 
 #### Up Next
 
-Keep users engaged by creating a path of discovery as the navigate from item to item, always showing the right mix of items they should check out next. Just add the id of the item that the user is navigating to / looking at.
+Keep users engaged by creating a path of discovery as they navigate from item to item, always showing the right mix of items they should check out next. Just add the id of the item that the user is navigating to / looking at.
 
 ```js
 tamber.discover.next({
@@ -162,7 +162,7 @@ tamber.discover.next({
     // user: "user_rlox8k927z7p"
 }, function(err, discoveries) {
     err; // null if no error occurred 
-    discoveries; // the similar items
+    discoveries; // the next items
 });
 ```
 
@@ -184,12 +184,12 @@ tamber.discover.popular({}, function(err, discoveries) {
 // BETA endpoints
 tamber.discover.uac({}, function(err, discoveries) {
     err; // null if no error occurred 
-    discoveries; // the most popular items
+    discoveries; // the most up-and-coming items
 });
 
 tamber.discover.new({}, function(err, discoveries) {
     err; // null if no error occurred 
-    discoveries; // the most popular items
+    discoveries; // the newest items
 });
 ```
 
@@ -202,7 +202,7 @@ tamber.discover.recommended({
     user: "user_rlox8k927z7p"
 }, function(err, discoveries) {
     err; // null if no error occurred 
-    discoveries; // the similar items
+    discoveries; // the recommended items
 });
 
 tamber.discover.similar({
@@ -217,7 +217,7 @@ tamber.discover.recommendedSimilar({
     item: "item_wmt4fn6o4zlk"
 }, function(err, discoveries) {
     err; // null if no error occurred 
-    discoveries; // the similar items
+    discoveries; // the recommended similar items
 });
 ```
 

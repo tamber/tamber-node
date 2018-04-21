@@ -1,4 +1,4 @@
-var tamber = require('../lib/Tamber')('Mu6DUPXdDYe98cv5JIfX', 'SbWYPBNdARfIDa0IIO9L');
+var tamber = require('../lib/Tamber')('Mu6DUPXdDYe98cv5JIfX');
 var assert = require('assert');
 
 tamber.setTimeout(80000);
@@ -325,29 +325,6 @@ describe('Tamber Test', function() {
 		    it('should return without error', function(done) {
 		    	tamber.discover.recommended({
 				user : user_1,
-				number: 5
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#Similar()', function() {
-		    it('should return without error', function(done) {
-		    	tamber.discover.similar({
-				item : item_1,
-				number: 10
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#RecommendedSimilar()', function() {
-		    it('should return without error', function(done) {
-		    	tamber.discover.recommendedSimilar({
-				user : user_1,
-				item : item_1
 				}, function(err, result){
 					if (err) throw err;
 		        	done();
@@ -365,6 +342,40 @@ describe('Tamber Test', function() {
 				});
 		    });
 		});
+		describe('#BasicRecommended()', function() {
+		    it('should return without error', function(done) {
+		    	tamber.discover.basic.recommended({
+				user : user_1,
+				number: 10
+				}, function(err, result){
+					if (err) throw err;
+		        	done();
+				});
+		    });
+		});
+		describe('#BasicSimilar()', function() {
+		    it('should return without error', function(done) {
+		    	tamber.discover.basic.similar({
+				item : item_1,
+				number: 10
+				}, function(err, result){
+					if (err) throw err;
+		        	done();
+				});
+		    });
+		});
+		describe('#BasicRecommendedSimilar()', function() {
+		    it('should return without error', function(done) {
+		    	tamber.discover.basic.recommendedSimilar({
+				user : user_1,
+				item : item_1
+				}, function(err, result){
+					if (err) throw err;
+		        	done();
+				});
+		    });
+		});
+		
 		describe('#Popular()', function() {
 		    it('should return without error', function(done) {
 		    	tamber.discover.popular({}, function(err, result){

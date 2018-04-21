@@ -25,7 +25,7 @@ Every resource is accessed via your `tamber` instance.
 ```js
 var tamber = require('tamber')('your_project_key');
 
-tamber.discover.next({
+tamber.discover.recommended({
     user: "user_rlox8k927z7p",
     number: 8
 }, function(err, recs) {
@@ -112,16 +112,18 @@ Just start streaming events for the behaviors in your app (ex. 'clicked/viewed',
 
 Once you have tracked enough events and created your engine, you may begin using `discover` to put personalized recommendations in your app.
 
-The primary method of discovery in Tamber is the `discover.next` method, which returns the optimal set of items that the user should be shown next.
+The primary method of discovery in Tamber are the `discover.next` and `discover.recommended` methods. `discover.next` is often the most impactful tool for driving lift, allowing you to turn your item pages into steps on personalized paths of discovery – it returns the optimal set of items that the user should be shown next on a given item page.
 
-#### For You
+`discover.recommended` works similarly, but is optimized for a recommended section, often located on a homepage.
 
-To put personalized recommendations on your homepage, or in any recommended section, just call `discover.next` with the number of recommendations you want to display (if you are calling server-side, also set the `user`).
+#### Up Next
+
+Keep users engaged by creating a path of discovery as they navigate from item to item, always showing the right mix of items they should check out next. Just add the id of the item that the user is navigating to / looking at.
 
 ```js
 tamber.discover.next({
-    number: 10,
-    get_properties: true,
+    item: "item_wmt4fn6o4zlk",
+    number: 14,
     // If implementing server-side, set the user field
     // user: "user_rlox8k927z7p"
 }, function(err, discoveries) {
@@ -136,12 +138,13 @@ If you are setting [properties for your items][properties], you can include thes
 
 ##### `continuation`
 
-`discover.next` is optimized for the exact moment and context of the user at the time of request, so standard pagination is not possible. Instead, `discover.next` uses automatic continuation to allow you to 'show more' or implement infinite scrolling. 
+Tamber's recommendations are optimized for the exact moment and context of the user at the time of request, so standard pagination is not possible. Instead, `discover.next` and `discover.recommended` use automatic continuation to allow you to 'show more' or implement infinite scrolling. 
 
-When you want to add more recommendations to those currently displayed to the user, just set the `continuation` field to `true`. Tamber will automatically generate the set of items that should be appended to the current user-session's list. The `discover.next` user-session is reset when `discover.next` is called without `continuation`.
+When you want to add more recommendations to those currently displayed to the user, just set `continuation` to `true`. Tamber will automatically generate the set of items that should be appended to the current user-session's list. The user-session is reset when either `discover.next` or `discover.recommended` is called without `continuation`.
 
 ```js
 tamber.discover.next({
+    item: "item_wmt4fn6o4zlk",
     number: 10,
     continuation: true
 }, function(err, discoveries) {
@@ -150,14 +153,14 @@ tamber.discover.next({
 });
 ```
 
-#### Up Next
+#### For You
 
-Keep users engaged by creating a path of discovery as they navigate from item to item, always showing the right mix of items they should check out next. Just add the id of the item that the user is navigating to / looking at.
+To put personalized recommendations on your homepage, or in any recommended section, just call `discover.recommended` with the number of recommendations you want to display (if you are calling server-side, also set the `user`).
 
 ```js
-tamber.discover.next({
-    item: "item_wmt4fn6o4zlk",
-    number: 14,
+tamber.discover.recommended({
+    number: 10,
+    get_properties: true,
     // If implementing server-side, set the user field
     // user: "user_rlox8k927z7p"
 }, function(err, discoveries) {
@@ -198,21 +201,21 @@ tamber.discover.new({}, function(err, discoveries) {
 Tamber allows you to use lower-level methods to get lists of recommended items, similar item matches, and similar items for a given user with which you can build your own discovery experiences. Importantly, these methods return raw recommendation data and are not intended to be pushed directly to users.
 
 ```js
-tamber.discover.recommended({
+tamber.discover.basic.recommended({
     user: "user_rlox8k927z7p"
 }, function(err, discoveries) {
     err; // null if no error occurred 
     discoveries; // the recommended items
 });
 
-tamber.discover.similar({
+tamber.discover.basic.similar({
     item: "item_wmt4fn6o4zlk"
 }, function(err, discoveries) {
     err; // null if no error occurred 
     discoveries; // the similar items
 });
 
-tamber.discover.recommendedSimilar({
+tamber.discover.basic.recommendedSimilar({
     user: "user_rlox8k927z7p",
     item: "item_wmt4fn6o4zlk"
 }, function(err, discoveries) {

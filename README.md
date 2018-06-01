@@ -43,7 +43,7 @@ const tamber = tamberPkg('project_key');
 
 ### Client side initialization
 
-We recommend implementing `tamber` client-side, though you can also implement `tamber` in your backend.
+We recommend implementing `tamber` client-side for event tracking, and in your backend for recommendation generation as part of normal page loading – but you can implement `tamber` in any configuration that works for you.
 
 #### Set User
 
@@ -112,7 +112,7 @@ Just start streaming events for the behaviors in your app (ex. 'clicked/viewed',
 
 Once you have tracked enough events and created your engine, you may begin using `discover` to put personalized recommendations in your app.
 
-The primary method of discovery in Tamber are the `discover.next` and `discover.recommended` methods. `discover.next` is often the most impactful tool for driving lift, allowing you to turn your item pages into steps on personalized paths of discovery – it returns the optimal set of items that the user should be shown next on a given item page.
+The primary methods of discovery in Tamber are the `discover.next` and `discover.recommended` methods. `discover.next` is often the most impactful tool for driving lift, allowing you to turn your item pages into steps on personalized paths of discovery – it returns the optimal set of items that the user should be shown next on a given item page.
 
 `discover.recommended` works similarly, but is optimized for a recommended section, often located on a homepage.
 

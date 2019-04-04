@@ -1,27 +1,25 @@
 {
   "name": "tamber",
-  "version": "1.0.15",
+  "version": "1.1.0",
   "description": "Recommendation engines for developers, easy as π. Build blazing fast, head-scratchingly accurate hosted recommendation engines in minutes.",
   "homepage": "https://github.com/tamber/tamber-node",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/tamber/tamber-node.git"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tamber/tamber-node.git"
   },
   "author": "Tamber <team@tamber.com> (https://tamber.com/)",
   "contributors": [
     "Alexi Robbins <alexi@tamber.com>"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/tamber/tamber-node.git"
-  },
   "bugs:": "https://github.com/tamber/tamber-node/issues",
   "engines": {
     "node": ">= v0.10.0"
   },
   "main": "lib/Tamber.js",
   "devDependencies": {
-    "mocha": "~2.1.0"
+    "mocha": "~5.0.5",
+    "chai": "~4.1.2",
+    "chai-as-promised": "~7.1.1"
   },
   "dependencies": {
     "lodash": "^3.1.0",

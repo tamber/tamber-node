@@ -25,20 +25,34 @@ Every resource is accessed via your `tamber` instance.
 ```js
 var tamber = require('tamber')('your_project_key');
 
-tamber.discover.recommended({
+const items = await tamber.discover.recommended({
     user: "user_rlox8k927z7p",
     number: 8
-}, function(err, recs) {
-    err; // null if no error occurred 
-    recs; // the recommended items for the user
+});
+```
+
+You may also use Promises and callbacks for versions of Node earlier than 7.10.0.
+
+```js
+// promise
+tamber.discover.recommended({
+    user: "user_rlox8k927z7p"
+}).then(items => handle(items));
+
+// callback
+tamber.discover.recommended({
+    user: "user_rlox8k927z7p"
+}, function(err, items){
+    err;    // null if no error occurred 
+    items;  // the recommended items
 });
 ```
 
 To initialize your `tamber` instance on ES6:
 
 ```js
-import tamberPkg from 'tamber';
-const tamber = tamberPkg('project_key');
+import Tamber from 'tamber';
+const tamber = Tamber('project_key');
 ```
 
 ### Client side initialization
@@ -73,11 +87,9 @@ If you handle guest user accounts internally and want to handle this manually, j
 
 ```js
 // Insert wherever user sign in / account creation is handled
-tamber.user.merge({
+const user = await tamber.user.merge({
     from: "temporary/guest_user_id", 
     to: "signed_in_user_id"
-}, function(err, result) {
-     err; // null if no error occurred.
 });
 ```
 
@@ -86,7 +98,7 @@ tamber.user.merge({
 Track all of your events (user-item interactions in your app) to your project in real time, just like you would for a data analytics service. Note that users and items will automatically be created and updated as needed.
 
 ```js
-tamber.event.track({
+const event = await tamber.event.track({
     item: {
         id: "item_wmt4fn6o4zlk",
         properties: {
@@ -97,12 +109,12 @@ tamber.event.track({
         tags: ["sci-fi", "bestseller"]
     }
     behavior: "like",
-    context: ["homepage", "featured_section"]
+    context: {
+        page: "homepage", 
+        section: "featured"
+    }
     // If implementing server-side, set the user field
     // user: "user_rlox8k927z7p",
-}, function(err, event) {
-    err; // null if no error occurred 
-    event; // the tracked event object
 });
 ```
 
@@ -121,14 +133,11 @@ The primary methods of discovery in Tamber are the `discover.next` and `discover
 Keep users engaged by creating a path of discovery as they navigate from item to item, always showing the right mix of items they should check out next. Just add the id of the item that the user is navigating to / looking at.
 
 ```js
-tamber.discover.next({
+const items = await tamber.discover.next({
     item: "item_wmt4fn6o4zlk",
     number: 14,
     // If implementing server-side, set the user field
     // user: "user_rlox8k927z7p"
-}, function(err, discoveries) {
-    err; // null if no error occurred 
-    discoveries; // the next items
 });
 ```
 
@@ -143,7 +152,7 @@ Tamber's recommendations are optimized for the exact moment and context of the u
 When you want to add more recommendations to those currently displayed to the user, just set `continuation` to `true`. Tamber will automatically generate the set of items that should be appended to the current user-session's list. The user-session is reset when either `discover.next` or `discover.recommended` is called without `continuation`.
 
 ```js
-tamber.discover.next({
+const items = await tamber.discover.next({
     item: "item_wmt4fn6o4zlk",
     number: 10,
     continuation: true
@@ -158,7 +167,7 @@ tamber.discover.next({
 To put personalized recommendations on your homepage, or in any recommended section, just call `discover.recommended` with the number of recommendations you want to display (if you are calling server-side, also set the `user`).
 
 ```js
-tamber.discover.recommended({
+const items = await tamber.discover.recommended({
     number: 10,
     get_properties: true,
     // If implementing server-side, set the user field
@@ -174,54 +183,13 @@ tamber.discover.recommended({
 Help your users keep their fingers on the pulse of your platform by showing them the hottest, most popular, newest, or most up-and-coming items.
 
 ```js
-tamber.discover.hot({}, function(err, discoveries) {
-    err; // null if no error occurred 
-    discoveries; // the hottest (trending) items
-});
+const hot = await tamber.discover.hot(); // the hottest (trending) items
 
-tamber.discover.popular({}, function(err, discoveries) {
-    err; // null if no error occurred 
-    discoveries; // the most popular items
-});
+const popular = tamber.discover.popular(); // the most popular items
 
-// BETA endpoints
-tamber.discover.uac({}, function(err, discoveries) {
-    err; // null if no error occurred 
-    discoveries; // the most up-and-coming items
-});
+const uac = tamber.discover.uac(); // the most up-and-coming items
 
-tamber.discover.new({}, function(err, discoveries) {
-    err; // null if no error occurred 
-    discoveries; // the newest items
-});
-```
-
-#### Build Your Own Features
-
-Tamber allows you to use lower-level methods to get lists of recommended items, similar item matches, and similar items for a given user with which you can build your own discovery experiences. Importantly, these methods return raw recommendation data and are not intended to be pushed directly to users.
-
-```js
-tamber.discover.basic.recommended({
-    user: "user_rlox8k927z7p"
-}, function(err, discoveries) {
-    err; // null if no error occurred 
-    discoveries; // the recommended items
-});
-
-tamber.discover.basic.similar({
-    item: "item_wmt4fn6o4zlk"
-}, function(err, discoveries) {
-    err; // null if no error occurred 
-    discoveries; // the similar items
-});
-
-tamber.discover.basic.recommendedSimilar({
-    user: "user_rlox8k927z7p",
-    item: "item_wmt4fn6o4zlk"
-}, function(err, discoveries) {
-    err; // null if no error occurred 
-    discoveries; // the recommended similar items
-});
+const _new = tamber.discover.new(); // the newest items
 ```
 
 ### Item properties
@@ -231,7 +199,7 @@ Setting your items' properties allows you to filter recommendations (ex. only re
 Just
 
 ```js
-tamber.item.update({
+const item = await tamber.item.update({
     id: "item_wmt4fn6o4zlk",
     updates: {
         add: {
@@ -244,9 +212,6 @@ tamber.item.update({
             tags: ["casual"],
         }
     }
-}, function(err, item) {
-    err; // null if no error occurred 
-    item; // the updated item object
 });
 ```
 
@@ -258,7 +223,7 @@ You can set the Timeout and Api Version of a `tamber` instance:
 
 ```js
 tamber.setTimeout(40000); // in ms
-tamber.setApiVersion("2017-9-11");
+tamber.setApiVersion("2019-3-31");
 ```
 
 ### Multiple Engines
@@ -266,11 +231,11 @@ tamber.setApiVersion("2017-9-11");
 You can easily create multiple `tamber` instances to interface with each of your engines and projects.
 
 ```js
-var tamberPkg = require('../lib/Tamber');
+var Tamber = require('../lib/Tamber');
 
-var tamber_1 = new tamberPkg('project_key_A','engine_key_A1'),
-    tamber_2 = new tamberPkg('project_key_A','engine_key_A2'),
-    tamber_3 = new tamberPkg('project_key_B','engine_key_B1');
+var tamber_1 = new Tamber('project_key_A','engine_key_A1'),
+    tamber_2 = new Tamber('project_key_A','engine_key_A2'),
+    tamber_3 = new Tamber('project_key_B','engine_key_B1');
 ```
 
 See [test.js](https://github.com/tamber/tamber-node/blob/master/test/test.js) for more examples.

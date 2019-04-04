@@ -1,5 +1,6 @@
 var tamber = require('../lib/Tamber')('Mu6DUPXdDYe98cv5JIfX');
 var assert = require('assert');
+var expect = require('chai').expect;
 
 tamber.setTimeout(80000);
 
@@ -20,538 +21,353 @@ var t_1 = 708652800;
 var t_2 = 1454465400;
 var tc = Math.floor(Date.now() / 1000);
 
+randStr = () => (Math.random() + 1).toString(36).substring(7)
+currentTime = () => Math.floor(Date.now() / 1000)
+
+const arrProp1 = "countries_"+randStr();
+const arrProp2 = "languages_"+randStr();
+
 describe('Tamber Test', function() {
-	this.timeout(tamber.getAttribute('timeout')*1000);
-	describe('Behavior', function() {
-		describe('#Create()', function() {
-		    it('should create without error', function(done) {
-		    	tamber.behavior.create({
-				name : behavior_1,
-				desirability: 0.6
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#Retrieve()', function() {
-		    it('should retrieve without error', function(done) {
-		    	tamber.behavior.retrieve({
-				name : behavior_1
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-	});
+  this.timeout(tamber.getAttribute('timeout'));
+  describe('Behavior', function() {
+    describe('#Create()', function() {
+      it('should create without error', function(done) {
+        tamber.behavior.create({
+          name : behavior_1,
+          desirability: 0.6
+        }).then(result => done()).catch(e => done(e));
+      });
+    });
+    describe('#Retrieve()', function() {
+      it('should retrieve without error', function(done) {
+        tamber.behavior.retrieve({
+          name : behavior_1
+      }).then(result => done()).catch(e => done(e));
+      });
+    });
+  });
 
-	describe('Event', function() {
+  describe('Event', function() {
 
-		describe('#Track()', function() {
-		    it('should track without error', function(done) {
-		    	tamber.event.track({
-				user : user_1,
-				behavior : behavior_1,
-				item: item_1,
-				hit: true,
-				context:["recommended"]
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#Retrieve() - user', function() {
-		    it('should retrieve without error', function(done) {
-		    	tamber.event.retrieve({
-				user : user_1,
-				}, function(err, result){
-					if (err) throw err;
-					var fmatch = filterMatch({
-							user: user_1,
-						}, result.events);
-					if (fmatch) throw fmatch;
-		        	done();
-				});
-		    });
-		});
-		describe('#Retrieve() - item', function() {
-		    it('should retrieve without error', function(done) {
-		    	tamber.event.retrieve({
-				item : item_1,
-				}, function(err, result){
-					if (err) throw err;
-					var fmatch = filterMatch({
-							item: item_1,
-						}, result.events);
-					if (fmatch) throw fmatch;
-		        	done();
-				});
-		    });
-		});
-		describe('#Retrieve() - behavior', function() {
-		    it('should retrieve without error', function(done) {
-		    	tamber.event.retrieve({
-				behavior : behavior_1,
-				}, function(err, result){
-					if (err) throw err;
-					var fmatch = filterMatch({
-							behavior : behavior_1
-						}, result.events);
-					if (fmatch) throw fmatch;
-		        	done();
-				});
-		    });
-		});
-		describe('#Retrieve() - created_since, created_before', function() {
-		    it('should retrieve without error', function(done) {
-		    	tamber.event.retrieve({
-				created_since : t_1,
-				created_before: currentTime(),
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#Retrieve() - user, created_since, created_before', function() {
-		    it('should retrieve without error', function(done) {
-		    	tamber.event.retrieve({
-				user : user_1,
-				created_since : t_1,
-				created_before: currentTime(),
-				}, function(err, result){
-					if (err) throw err;
-					var fmatch = filterMatch({
-							user: user_1,
-						}, result.events);
-					if (fmatch) throw fmatch;
-		        	done();
-				});
-		    });
-		});
-		describe('#Retrieve() - item, created_since, created_before', function() {
-		    it('should retrieve without error', function(done) {
-		    	tamber.event.retrieve({
-				item : item_1,
-				created_since : t_1,
-				created_before: currentTime(),
-				}, function(err, result){
-					if (err) throw err;
-					var fmatch = filterMatch({
-							item: item_1,
-						}, result.events);
-					if (fmatch) throw fmatch;
-		        	done();
-				});
-		    });
-		});
-		describe('#Retrieve() - behavior, created_since, created_before', function() {
-		    it('should retrieve without error', function(done) {
-		    	tamber.event.retrieve({
-				behavior : behavior_1,
-				created_since : t_1,
-				created_before: currentTime(),
-				}, function(err, result){
-					if (err) throw err;
-					var fmatch = filterMatch({
-							behavior : behavior_1
-						}, result.events);
-					if (fmatch) throw fmatch;
-		        	done();
-				});
-		    });
-		});
-		describe('#Retrieve() - user, behavior, created_since, created_before', function() {
-		    it('should retrieve without error', function(done) {
-		    	tamber.event.retrieve({
-		    	user: user_1,
-				behavior : behavior_1,
-				created_since : t_1,
-				created_before: currentTime(),
-				}, function(err, result){
-					if (err) throw err;
-					var fmatch = filterMatch({
-							user: user_1,
-							behavior : behavior_1
-						}, result.events);
-					if (fmatch) throw fmatch;
-		        	done();
-				});
-		    });
-		});
-		describe('#Retrieve() - item, behavior, created_since, created_before', function() {
-		    it('should retrieve without error', function(done) {
-		    	tamber.event.retrieve({
-		    	item: item_1,
-				behavior : behavior_1,
-				created_since : t_1,
-				created_before: currentTime(),
-				}, function(err, result){
-					if (err) throw err;
-					var fmatch = filterMatch({
-							item: item_1,
-							behavior : behavior_1
-						}, result.events);
-					if (fmatch) throw fmatch;
-		        	done();
-				});
-		    });
-		});
-		describe('#Batch()', function() {
-		    it('should batch without error', function(done) {
-		    	tamber.event.batch({
-				events : [
-						{
-							user:     user_2,
-							item:     item_2,
-							behavior: behavior_1,
-						},
-						{
-							user:     user_2,
-							item:     item_1,
-							behavior: behavior_1,
-						},
-						{
-							user:     user_3,
-							item:     item_1,
-							behavior: behavior_1,
-						},
-						{
-							user:     user_2,
-							item:     item_3,
-							behavior: behavior_1,
-						},
-						{
-							user:     user_2,
-							item:     item_4,
-							behavior: behavior_1,
-						},
-						{
-							user:     user_3,
-							item:     item_4,
-							behavior: behavior_1,
-						}
-					]
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-	});
+    describe('#Track()', function() {
+      it('should track without error', function(done) {
+        tamber.event.track({
+          user : user_1,
+          behavior : behavior_1,
+          item: item_1,
+          hit: true,
+          context:{"section":"recommended"}
+        }).then(result => done()).catch(e => done(e));
+      });
+    });
+    describe('#Retrieve() - user', function() {
+      it('should retrieve without error', function(done) {
+        tamber.event.retrieve({
+          user : user_1,
+        }).then(result => {
+          expect(result.events).to.be.an('array');
+          result.events.every(e => expect(e).to.have.property('user', user_1));
+          done();
+        }).catch(e => done(e));
+      });
+    });
+    describe('#Retrieve() - item', function() {
+      it('should retrieve without error', function(done) {
+        tamber.event.retrieve({
+          item : item_1,
+        }).then(result => {
+          expect(result.events).to.be.an('array');
+          result.events.every(e => expect(e).to.have.property('item', item_1));
+          done();
+        }).catch(e => done(e));
+      });
+    });
+    describe('#Retrieve() - behavior', function() {
+      it('should retrieve without error', function(done) {
+        tamber.event.retrieve({
+          behavior : behavior_1,
+        }).then(result => {
+          expect(result.events).to.be.an('array');
+          result.events.every(e => expect(e).to.have.property('behavior', behavior_1));
+          done();
+        }).catch(e => done(e));
+      });
+    });
+    describe('#Retrieve() - created_since, created_before', function() {
+      it('should retrieve created_since, created_before without error', function(done) {
+        tamber.event.retrieve({
+          created_since : t_1,
+          created_before: currentTime(),
+          number: 5
+        }).then(result => done()).catch(e => done(e));
+      });
+    });
+    describe('#Retrieve() - user, created_since, created_before', function() {
+      it('should retrieve without error', function(done) {
+        tamber.event.retrieve({
+          user : user_1,
+          created_since : t_1,
+          created_before: currentTime(),
+          number: 5
+        }).then(result => {
+          expect(result.events).to.be.an('array').and.to.have.lengthOf.within(0, 6);
+          result.events.every(e => expect(e).to.have.property('user', user_1));
+          done();
+        }).catch(e => done(e));
+      });
+    });
+    describe('#Retrieve() - item, created_since, created_before', function() {
+      it('should retrieve without error', function(done) {
+        tamber.event.retrieve({
+          item : item_1,
+          created_since : t_1,
+          created_before: currentTime(),
+          number: 5
+        }).then(result => {
+          expect(result.events).to.be.an('array').and.to.have.lengthOf.within(0, 6);
+          result.events.every(e => expect(e).to.have.property('item', item_1));
+          done();
+        }).catch(e => done(e));
+      });
+    });
+    describe('#Retrieve() - behavior, created_since, created_before', function() {
+      it('should retrieve without error', function(done) {
+        tamber.event.retrieve({
+          behavior : behavior_1,
+          created_since : t_1,
+          created_before: currentTime(),
+          number: 5
+        }).then(result => {
+          expect(result.events).to.be.an('array').and.to.have.lengthOf.within(0, 6);
+          result.events.every(e => expect(e).to.have.property('behavior', behavior_1));
+          done();
+        }).catch(e => done(e));
+      });
+    });
+    describe('#Retrieve() - user, behavior, created_since, created_before', function() {
+      it('should retrieve without error', function(done) {
+        tamber.event.retrieve({
+          user: user_1,
+          behavior : behavior_1,
+          created_since : t_1,
+          created_before: currentTime(),
+          number: 5
+        }).then(result => {
+          expect(result.events).to.be.an('array').and.to.have.lengthOf.within(0, 6);
+          result.events.every(e => expect(e).to.deep.include({behavior: behavior_1, user: user_1}));
+          done();
+        }).catch(e => done(e));
+      });
+    });
+    describe('#Retrieve() - item, behavior, created_since, created_before', function() {
+      it('should retrieve without error', function(done) {
+        tamber.event.retrieve({
+          item: item_1,
+          behavior : behavior_1,
+          created_since : t_1,
+          created_before: currentTime(),
+          number: 5
+        }).then(result => {
+          expect(result.events).to.be.an('array').and.to.have.lengthOf.within(0, 6);
+          result.events.every(e => expect(e).to.deep.include({behavior: behavior_1, item: item_1}));
+          done();
+        }).catch(e => done(e));
+      });
+    });
+    describe('#Batch()', function() {
+      it('should batch without error', function(done) {
+        tamber.event.batch({
+          events : [
+            {
+              user:     user_2,
+              item:     item_2,
+              behavior: behavior_1,
+            },
+            {
+              user:     user_2,
+              item:     item_1,
+              behavior: behavior_1,
+            },
+            {
+              user:     user_3,
+              item:     item_1,
+              behavior: behavior_1,
+            },
+            {
+              user:     user_2,
+              item:     item_3,
+              behavior: behavior_1,
+            },
+            {
+              user:     user_2,
+              item:     item_4,
+              behavior: behavior_1,
+            },
+            {
+              user:     user_3,
+              item:     item_4,
+              behavior: behavior_1,
+            }
+          ]
+        }).then(result => done()).catch(e => done(e));
+      });
+    });
+  });
 
+  describe('Item', function() {
+    describe('#Create()', function() {
+      it('should create without error', function(done) {
+        tamber.item.create({
+          id : item_5,
+          properties: {
+            clothing_type:   "pants",
+            stock:           90,
+            color:           "blue"
+          },
+          tags: ["casual", "feminine"]
+        }).then(result => done()).catch(e => done(e));
+      });
+    });
+    describe('#Update()', function() {
+      it('should update without error', function(done) {
+        var props = {"stock": 89};
+        props[arrProp1] = [];
+        tamber.item.update({
+          id : item_5,
+          updates: {
+            add: {
+              properties: props,
+              tags: ["weird"]
+            },
+            remove: {
+              tags: ["casual"],
+              properties: {"color": ""}
+            }
+          }
+        }).then(item => {
+          expect(item.tags).to.not.include('casual');
+          expect(item.properties).to.not.have.property('color');
+          done();
+        }).catch(e => done(e));
+      });
+    });
+    describe('#Retrieve()', function() {
+      it('should retrieve without error', function(done) {
+        tamber.item.retrieve({
+          id : item_5
+        }).then(result => done()).catch(e => done(e));
+      });
+    });
+    describe('#Hide()', function() {
+      it('should remove without error', function(done) {
+        tamber.item.hide({
+          id : item_4
+        }).then(result => done()).catch(e => done(e));
+      });
+    });
+  });
 
-	describe('Item', function() {
-		describe('#Create()', function() {
-		    it('should create without error', function(done) {
-		    	tamber.item.create({
-				id : item_5,
-				properties: {
-					"clothing_type": "pants",
-					"stock":         90,
-				},
-				tags: ["casual", "feminine"]
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#Update()', function() {
-		    it('should update without error', function(done) {
-		    	tamber.item.update({
-				id : item_5,
-				updates: {
-					add: {
-						properties: {"stock": 89}
-					},
-					remove: {
-						tags: ["casual"],
-					}
-				}
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#Retrieve()', function() {
-		    it('should retrieve without error', function(done) {
-		    	tamber.item.retrieve({
-				id : item_5
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#Hide()', function() {
-		    it('should remove without error', function(done) {
-		    	tamber.item.hide({
-				id : item_4
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#Update() after #Remove()', function() {
-		    it('should update and reintroduce previously removed item without error', function(done) {
-		    	tamber.item.update({
-				id : item_4,
-				updates : {}
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#Retrieve() ater #Remove() then #Update()', function() {
-		    it('should retrieve without error', function(done) {
-		    	tamber.item.retrieve({
-				id : item_5
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-	});
+  describe('Discover', function() {
+    describe('#Recommended()', function() {
+      it('should return without error', function(done) {
+        tamber.discover.recommended({
+          user : user_1,
+        }).then(items => {
+          expect(items).to.be.an('array').and.to.have.lengthOf.above(0);
+          done();
+        }).catch(e => done(e));
+      });
+    });
+    describe('#Next()', function() {
+      it('should return without error', function(done) {
+        tamber.discover.next({
+          user : user_1,
+          number: 8,
+          get_properties: true
+        }).then(items => {
+          expect(items).to.be.an('array').and.to.have.lengthOf.above(0);
+          done();
+        }).catch(e => done(e));
+      });
+    });
+    describe('#Weekly()', function() {
+      it('should return without error', function(done) {
+        tamber.discover.weekly({
+          user : user_1,
+          number: 8,
+          get_properties: true
+        }).then(items => {
+          expect(items).to.be.an('array').and.to.have.lengthOf.above(0);
+          done();
+        }).catch(e => done(e));
+      });
+    });
+    describe('#Daily()', function() {
+      it('should return without error', function(done) {
+        tamber.discover.daily({
+          user : user_1,
+          number: 8,
+          get_properties: true
+        }).then(items => {
+          expect(items).to.be.an('array').and.to.have.lengthOf.above(0);
+          done();
+        }).catch(e => done(e));
+      });
+    });
+    
+    describe('#Popular()', function() {
+      it('should return without error', function(done) {
+        tamber.discover.popular()
+        .then(result => done()).catch(e => done(e));
+      });
+    });
+    describe('#Hot()', function() {
+      it('should return without error', function(done) {
+        tamber.discover.hot()
+        .then(result => done()).catch(e => done(e));
+      });
+    });
+  });
 
-	describe('Discover', function() {
-		describe('#Recommended()', function() {
-		    it('should return without error', function(done) {
-		    	tamber.discover.recommended({
-				user : user_1,
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#Next()', function() {
-		    it('should return without error', function(done) {
-		    	tamber.discover.next({
-				user : user_1,
-				item : item_1
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#BasicRecommended()', function() {
-		    it('should return without error', function(done) {
-		    	tamber.discover.basic.recommended({
-				user : user_1,
-				number: 10
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#BasicSimilar()', function() {
-		    it('should return without error', function(done) {
-		    	tamber.discover.basic.similar({
-				item : item_1,
-				number: 10
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#BasicRecommendedSimilar()', function() {
-		    it('should return without error', function(done) {
-		    	tamber.discover.basic.recommendedSimilar({
-				user : user_1,
-				item : item_1
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		
-		describe('#Popular()', function() {
-		    it('should return without error', function(done) {
-		    	tamber.discover.popular({}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#Hot()', function() {
-		    it('should return without error', function(done) {
-		    	tamber.discover.hot({}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-	});
-
-	describe('User', function() {
-		describe('#Create()', function() {
-	    	it('should create actor without error', function(done) {
-		    	tamber.user.create({
-				id : user_4, 
-				metadata: {
-					"city": "San Francisco, CA",
-				},
-				events: [
-					{
-						item:     item_2,
-						behavior: behavior_1,
-					},
-					{
-						item:     item_1,
-						behavior: behavior_1,
-					}
-				]
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#Update()', function() {
-	    	it('should addBehaviors without error', function(done) {
-		    	tamber.user.update({
-				id : user_4, 
-				metadata: {
-					"city": "Mountain View, CA",
-					"age":  "55-65",
-					"name": "Rob Pike",
-				}
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#Retrieve()', function() {
-		    it('should retrieve without error', function(done) {
-		    	tamber.user.retrieve({
-				id : user_4
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-		describe('#Search()', function() {
-		    it('should search without error', function(done) {
-		    	tamber.user.search({
-				filter : {
-					"city": "Mountain View, CA"
-					}
-				}, function(err, result){
-					if (err) throw err;
-		        	done();
-				});
-		    });
-		});
-	});
+  describe('User', function() {
+    describe('#Create()', function() {
+      it('should create actor without error', function(done) {
+        tamber.user.create({
+          id : user_4, 
+          metadata: {
+            "city": "San Francisco, CA",
+          },
+          events: [
+            {
+              item:     item_2,
+              behavior: behavior_1,
+            },
+            {
+              item:     item_1,
+              behavior: behavior_1,
+            }
+          ]
+        }).then(result => done()).catch(e => done(e));
+      });
+    });
+    describe('#Update()', function() {
+      it('should addBehaviors without error', function(done) {
+        tamber.user.update({
+          id : user_4, 
+          metadata: {
+            "city": "Mountain View, CA",
+            "age":  "55-65",
+            "name": "Rob Pike",
+          }
+        }).then(result => done()).catch(e => done(e));
+      });
+    });
+    describe('#Retrieve()', function() {
+      it('should retrieve without error', function(done) {
+        tamber.user.retrieve({
+          id : user_4
+        }).then(result => done()).catch(e => done(e));
+      });
+    });
+  });
 });
-
-// describe('Tamber Guest User Tracking Test', function() {
-// 	it('should set track guests without error', function(done) {
-// 		tamber.setTrackGuests(true);
-// 		done();
-// 	});
-// 	it('should track without error', function(done) {
-// 		tamber.event.track({
-// 			item : item_5,
-// 			behavior: behavior_1
-// 		}, function(err, result){
-// 			if (err) throw err;
-// 			done();
-// 		});
-// 	});
-// 	it('should retrieve without error', function(done) {
-// 		tamber.event.retrieve({
-// 		}, function(err, result){
-// 			if (err) throw err;
-// 			done();
-// 		});
-// 	});
-// 	it('should batch without error', function(done) {
-// 		tamber.event.batch({
-// 			events : [
-// 					{
-// 						item:     item_2,
-// 						behavior: behavior_1,
-// 					},
-// 					{
-// 						item:     item_1,
-// 						behavior: behavior_1,
-// 					}
-// 				]
-// 		}, function(err, result){
-// 			if (err) throw err;
-// 			done();
-// 		});
-// 	});
-// 	it('should discover/recommended without error', function(done) {
-// 		tamber.discover.recommended({
-// 		}, function(err, result){
-// 			if (err) throw err;
-// 			done();
-// 		});
-// 	});
-// 	it('should discover/recommended_similar without error', function(done) {
-// 		tamber.discover.recommendedSimilar({
-// 			item:item_3
-// 		}, function(err, result){
-// 			if (err) throw err;
-// 			done();
-// 		});
-// 	});
-// 	it('should discover/recommended with test_events without error', function(done) {
-// 		tamber.discover.recommended({
-// 			item:item_3,
-// 			test_events:[
-// 				{
-// 					item:     item_3,
-// 					behavior: behavior_1,
-// 				},
-// 				{
-// 					item:     item_1,
-// 					behavior: behavior_1,
-// 				}
-// 			]
-// 		}, function(err, result){
-// 			if (err) throw err;
-// 			done();
-// 		});
-// 	});
-// });
-
-function filterMatch(filter, results){
-	for (var k in filter){
-		for (var i = 0; i< results.length; i++){
-			if(results[i][k] != filter[k]){
-				return "Results do not match filter "+ k+":"+filter[k]+" result val: "+results[i][k];
-			}
-		}
-	}
-	return null;
-}
-
-function randStr(){
-	return (Math.random() + 1).toString(36).substring(7);
-}
-
-function currentTime(){
-	return Math.floor(Date.now() / 1000);
-}
-
-
-
-
-
-

@@ -93,15 +93,15 @@ describe('Tamber Test', function() {
         }).catch(e => done(e));
       });
     });
-    describe('#Retrieve() - created_since, created_before', function() {
-      it('should retrieve created_since, created_before without error', function(done) {
-        tamber.event.retrieve({
-          created_since : t_1,
-          created_before: currentTime(),
-          number: 5
-        }).then(result => done()).catch(e => done(e));
-      });
-    });
+    // describe('#Retrieve() - created_since, created_before', function() {
+    //   it('should retrieve created_since, created_before without error', function(done) {
+    //     tamber.event.retrieve({
+    //       created_since : t_1,
+    //       created_before: currentTime(),
+    //       number: 5
+    //     }).then(result => done()).catch(e => done(e));
+    //   });
+    // });
     describe('#Retrieve() - user, created_since, created_before', function() {
       it('should retrieve without error', function(done) {
         tamber.event.retrieve({

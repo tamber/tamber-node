@@ -367,11 +367,17 @@ describe('Tamber Test', function() {
         tamber.user.update({
           id : user_4, 
           metadata: {
-            "city": "Mountain View, CA",
+            "city": "San Francisco, CA",
+          }
+        }).then(user => {
+          expect(user.metadata.city).to.eql("San Francisco, CA");
+          expect(user.metadata).to.eql({
+            "city": "San Francisco, CA",
             "age":  "55-65",
             "name": "Rob Pike",
-          }
-        }).then(result => done()).catch(e => done(e));
+          });
+          done();
+        }).catch(e => done(e));
       });
     });
     describe('#Retrieve()', function() {

@@ -1,3 +1,8 @@
+1.2.0 6-16-2020
+	Version 1.2.0
+	- Adds `item.save` and `item.batch`
+	- Moves from `user.update` to `user.save`
+	
 1.0.6 3-27-2017
 	Version 1.0.6
 	- Move to prototype with simpler initialization

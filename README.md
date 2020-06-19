@@ -199,19 +199,13 @@ Setting your items' properties allows you to filter recommendations (ex. only re
 Just
 
 ```js
-const item = await tamber.item.update({
+const item = await tamber.item.save({
     id: "item_wmt4fn6o4zlk",
-    updates: {
-        add: {
-            properties: {
-                "clothing_type": "pants",
-                "stock":         90
-            }
-        },
-        remove: {
-            tags: ["casual"],
-        }
-    }
+    properties: {
+        "clothing_type": "pants",
+        "stock":         90
+    },
+    tags: ["casual"]
 });
 ```
 
@@ -223,7 +217,7 @@ You can set the Timeout and Api Version of a `tamber` instance:
 
 ```js
 tamber.setTimeout(40000); // in ms
-tamber.setApiVersion("2019-3-31");
+tamber.setApiVersion("2020-6-11");
 ```
 
 ### Multiple Engines

@@ -350,8 +350,20 @@ describe('Tamber Test', function() {
         }).then(result => done()).catch(e => done(e));
       });
     });
+    describe('#Save()', function() {
+      it('should save user without error', function(done) {
+        tamber.user.save({
+          id : user_4, 
+          metadata: {
+            "city": "Mountain View, CA",
+            "age":  "55-65",
+            "name": "Rob Pike",
+          }
+        }).then(result => done()).catch(e => done(e));
+      });
+    });
     describe('#Update()', function() {
-      it('should addBehaviors without error', function(done) {
+      it('should update user without error', function(done) {
         tamber.user.update({
           id : user_4, 
           metadata: {
